@@ -2,7 +2,6 @@ package service;
 
 import java.io.StringWriter;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import javax.ws.rs.GET;
@@ -12,15 +11,15 @@ import javax.ws.rs.Produces;
 import models.jaxb.A;
 import models.jaxb.B;
 
+import com.google.gson.Gson;
 import com.sun.jersey.api.json.JSONConfiguration;
 import com.sun.jersey.api.json.JSONJAXBContext;
 import com.sun.jersey.api.json.JSONMarshaller;
 
-@Path("/simple")
-public class Simple {
-	
+@Path("/gsoned")
+public class Gsoned {
 	A a;
-	public Simple(){
+	public Gsoned(){
 		a = new A();
 		List<B> elBs = new ArrayList<B>();
 		B b = new B();
@@ -32,13 +31,13 @@ public class Simple {
 	}
 
 	@GET @Produces("application/json")
-	public A emptyGet(){
-		return a;
+	public String emptyGet(){
+		return new Gson().toJson(a);
 	}
 	
 	@GET @Path("/all") @Produces("application/json")
-	public Collection<B> getBs(){
-		return a.getElements();
+	public String getBs(){
+		return new Gson().toJson(a.getElements());
 	}
 	
 	@GET @Path("/string")
