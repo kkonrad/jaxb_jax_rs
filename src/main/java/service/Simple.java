@@ -48,7 +48,7 @@ public class Simple {
         A myInstance = a;
         StringWriter writer = new StringWriter();
         JSONConfiguration config = JSONConfiguration.natural().build();
-        Class[] types = {A.class, B.class};
+        Class<?>[] types = {A.class, B.class};
         JSONJAXBContext context = new JSONJAXBContext(config, types);
         JSONMarshaller marshaller = context.createJSONMarshaller();
         marshaller.marshallToJSON(myInstance, writer);
